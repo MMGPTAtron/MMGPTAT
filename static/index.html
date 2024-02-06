@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<!-- seo related -->
+	<title>MindMateGPT</title>
+    <meta name="description" content="Discover MindMateGPT, your AI-powered therapist app offering personalized mental health support, expert advice, and effective coping strategies. Begin your journey to emotional well-being today!">
+
+	<!-- meta related -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+	<!-- custom css -->
+	<link rel="stylesheet" type="text/css" href="static/main.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="static/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="static/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="static/favicon/favicon-16x16.png">
+    <link rel="manifest" href="static/favicon/site.webmanifest">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3543975384261838"
+     crossorigin="anonymous"></script>
+</head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZYL1S2102L"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-ZYL1S2102L');
+</script>
+
+<body>
+    <script>
+        // Get the session_id from the HTML
+        const sessionId = "user_data_SESSION={{user}}";
+
+        window.addEventListener("beforeunload", function (event) {
+            fetch("https://mindmategpt.com/api/session/" + sessionId, {
+                method: "DELETE",
+                keepalive: true
+            });
+        });
+
+    </script>
+    <p style="display: none" id="session">SESSION={{user}}</p>
+    <div id="landing"></div>
+    <div id="form" style="display:none;" class="container"></div>
+    <div id="chat" style="display:none;"></div>
+    <div id="about" style="display:none;"></div>
+	<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.3/js/bootstrapValidator.min.js"> </script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="static/form/model/formModel.js"></script>
+    <script src="static/form/service/formService.js"></script>
+    <script src="static/form/controller/formController.js"></script>
+    <script src="static/landing/controller/landingController.js"></script>
+    <script src="static/chat/controller/chatController.js"></script>
+    <script src="static/chat/model/chatModel.js"></script>
+    <script src="static/chat/service/chatService.js"></script>
+    <script>
+    window.onload = function() {
+        loadHTML('static/landing/view/landingView.html', 'landing')
+            .then(() => {
+            loadHTML('static/form/view/formView.html', 'form')
+                .then(() => {
+                    const contactFormModel = new ContactFormModel();
+                    const contactFormService = new ContactFormServices();
+                    const contactFormController = new ContactFormController(contactFormModel, contactFormService);
+
+                    contactFormController.init();
+                    loadHTML('static/chat/view/chatView.html', 'chat')
+                        .then(() => {
+                            const chatModel = new ChatModel();
+                            const chatService = new ChatService();
+                            const chatController = new ChatController(chatModel, chatService);
+                            loadHTML('static/about/view/aboutView.html', 'about')
+                                .then(() => {
+                                });
+                        });
+                    });
+                });
+            };
+
+    function loadHTML(url, elementId) {
+        return fetch(url)
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById(elementId).innerHTML = html;
+            })
+            .catch(error => console.warn('Something went wrong.', error));
+    }
+    </script>
+</body>
+</html>
